@@ -13,7 +13,7 @@ public class OnChat implements Listener {
     public void onChatEvent(AsyncPlayerChatEvent e) {
         String msg = e.getMessage();
         String newMsg = Cow.instance.getSacredLog().removeSacredWords(msg);
-        if (msg.equals(newMsg)) {
+        if (!msg.equals(newMsg)) {
             e.getPlayer().sendMessage("Please do not offend the Sacred Cow.....");
             e.setMessage(newMsg);
         }
