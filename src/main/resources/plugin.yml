@@ -1,0 +1,10 @@
+name: ${project.artifactId}
+main: us.minelegends.grey.sacredcow.Cow
+version: ${project.version}
+author: [Greymouth]
+
+commands:
+  addsword:
+    description: Adds a Sacred word to the Sacred Cow Log...
+    usage: /<command> [word]
+
