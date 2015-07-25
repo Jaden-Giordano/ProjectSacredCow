@@ -13,15 +13,19 @@ public class Cow extends JavaPlugin {
     public static Cow instance;
 
     private SacredLog sacredLog;
+    private MooMute mooMute;
 
     @Override
     public void onEnable() {
         instance = this;
         this.getLogger().info("Reading Sacred Logs...");
         this.sacredLog = new SacredLog(this.getDataFolder().getAbsolutePath());
+        this.mooMute = new MooMute(this.getDataFolder().getAbsolutePath());
 
         this.getServer().getPluginManager().registerEvents(new OnChat(), this);
         this.getCommand("addsword").setExecutor(new AddExecutor());
+        this.getCommand("moo").setExecutor(new MuteExecutor());
+        this.getCommand("unmoo").setExecutor(new MuteExecutor());
 
         this.getLogger().info(this.getName() + " has been loaded...");
     }
@@ -30,11 +34,16 @@ public class Cow extends JavaPlugin {
     public void onDisable() {
         this.getLogger().info("Saving Sacred Logs...");
         this.sacredLog.saveToSacredLog();
+        this.mooMute.saveToMooMute();
         this.getLogger().info(this.getName() + " has been disabled...");
     }
 
     public SacredLog getSacredLog() {
         return this.sacredLog;
+    }
+
+    public MooMute getMooMute() {
+        return this.mooMute;
     }
 
 }

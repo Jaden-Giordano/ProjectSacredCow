@@ -11,11 +11,16 @@ public class OnChat implements Listener {
 
     @EventHandler
     public void onChatEvent(AsyncPlayerChatEvent e) {
-        String msg = e.getMessage();
-        String newMsg = Cow.instance.getSacredLog().removeSacredWords(msg);
-        if (!msg.equals(newMsg)) {
-            e.getPlayer().sendMessage("Please do not offend the Sacred Cow.....");
-            e.setMessage(newMsg);
+        if (Cow.instance.getMooMute().contains(e.getPlayer().getName())) {
+           e.setMessage("moo");
+        }
+        else {
+            String msg = e.getMessage();
+            String newMsg = Cow.instance.getSacredLog().removeSacredWordsInMessage(msg);
+            if (!msg.equals(newMsg)) {
+                e.getPlayer().sendMessage("Please do not offend the Sacred Cow.....");
+                e.setMessage(newMsg);
+            }
         }
     }
 

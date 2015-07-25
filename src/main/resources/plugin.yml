@@ -7,4 +7,9 @@ commands:
   addsword:
     description: Adds a Sacred word to the Sacred Cow Log...
     usage: /<command> [word]
-
+  moo:
+    description: Makes a player moo when they attempt to speak...
+    usage: /<command> [player]
+  unmoo:
+    description: Un moos a player...
+    usage: /<command> [player]

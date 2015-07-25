@@ -19,7 +19,7 @@ public class SacredLog {
         try {
             File file = new File(path+File.separator+"SacredLog.cow");
             File filePath = new File(path);
-            filePath.mkdir();
+            filePath.mkdirs();
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -29,7 +29,9 @@ public class SacredLog {
 
             String line;
             while ((line = br.readLine()) != null) {
-                this.sacredwords.add(line);
+                if (!this.contains(line)) {
+                    this.sacredwords.add(line);
+                }
             }
 
             br.close();
@@ -76,12 +78,33 @@ public class SacredLog {
         return this.sacredwords;
     }
 
-    public String removeSacredWords(String msg) {
+    public String removeSacredWordsInMessage(String msg) {
         String newMsg = msg;
         for (String i : sacredwords) {
             newMsg = newMsg.replaceAll("(?i)"+i, "moo");
         }
         return newMsg;
+    }
+
+    public void removeSacredWord(String s) {
+        List<String> remove = new ArrayList<String>();
+        for (String i : this.sacredwords) {
+            if (i.equalsIgnoreCase(s)) {
+                remove.add(i);
+            }
+        }
+        for (String i : remove) {
+            this.sacredwords.remove(i);
+        }
+    }
+
+    public boolean contains(String s) {
+        for (String i : this.sacredwords) {
+            if (i.equalsIgnoreCase(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
